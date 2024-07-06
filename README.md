@@ -5,8 +5,17 @@ codes
 
 ## Usage
 
-```typescript
-import { colorMe } from "color-me";
+1. Add the package to your project:
 
-console.log(colorMe.red("Hello, world!"));
+```bash
+deno add @eveffer/color-me
+```
+
+2. Import the package and use it:
+
+```typescript
+import { colorMe } from "@eveffer/color-me";
+
+const message = colorMe.green("Hello, world!");
+console.log(message);
 ```
