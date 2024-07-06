@@ -8,7 +8,7 @@ const colors = {
   hidden: "\x1b[8m",
   black: "\x1b[30m",
   red: "\x1b[31m",
-  geen: "\x1b[32m",
+  green: "\x1b[32m",
   yellow: "\x1b[33m",
   blue: "\x1b[34m",
   magenta: "\x1b[35m",
@@ -50,6 +50,18 @@ const color = (message: string, color: ColorName) => {
 };
 
 type ColorMe = Record<ColorName, ColorFunction>;
+
+/**
+ * ColorMe is a utility to colorize your terminal output.
+ *
+ * @example
+ * ```ts
+ * import { colorMe } from "@eveffer/color-me";
+ *
+ * const message = colorMe.green("Hello, World!");
+ * console.log(message);
+ * ```
+ */
 export const colorMe: ColorMe = {} as ColorMe;
 
 for (const colorName in colors) {
