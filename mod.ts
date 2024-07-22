@@ -3,9 +3,11 @@ const colors = {
   bright: "\x1b[1m",
   dim: "\x1b[2m",
   underscore: "\x1b[4m",
+  strikethrough: "\x1b[9m",
   blink: "\x1b[5m",
   reverse: "\x1b[7m",
   hidden: "\x1b[8m",
+  italic: "\x1b[3m",
   black: "\x1b[30m",
   red: "\x1b[31m",
   green: "\x1b[32m",
@@ -19,6 +21,7 @@ const colors = {
   bgRed: "\x1b[41m",
   bgGreen: "\x1b[42m",
   bgYellow: "\x1b[43m",
+  bold: "\x1b[1m",
   bgBlue: "\x1b[44m",
   bgMagenta: "\x1b[45m",
   bgCyan: "\x1b[46m",
@@ -43,9 +46,33 @@ const colors = {
 };
 
 type ColorName = keyof typeof colors;
-type ColorFunction = (message: string) => string;
+type ColorFunction = (message: string, options?: ColorOptions) => string;
 
-const color = (message: string, color: ColorName) => {
+interface ColorOptions {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  inverse?: boolean;
+  strikethrough?: boolean;
+}
+
+const color = (message: string, color: ColorName, options?: ColorOptions) => {
+  if (options?.bold) {
+    message = `${colors.bold}${message}`;
+  }
+  if (options?.italic) {
+    message = `${colors.italic}${message}`;
+  }
+  if (options?.underline) {
+    message = `${colors.underscore}${message}`;
+  }
+  if (options?.inverse) {
+    message = `${colors.reverse}${message}`;
+  }
+  if (options?.strikethrough) {
+    message = `${colors.strikethrough}${message}`;
+  }
+
   return `${colors[color]}${message}${colors.reset}`;
 };
 
@@ -65,6 +92,6 @@ type ColorMe = Record<ColorName, ColorFunction>;
 export const colorMe: ColorMe = {} as ColorMe;
 
 for (const colorName in colors) {
-  colorMe[colorName as ColorName] = (message: string) =>
-    color(message, colorName as ColorName);
+  colorMe[colorName as ColorName] = (message: string, options?: ColorOptions) =>
+    color(message, colorName as ColorName, options);
 }
