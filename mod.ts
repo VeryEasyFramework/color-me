@@ -49,6 +49,7 @@ type ColorName = keyof typeof colors;
 type ColorFunction = (message: string, options?: ColorOptions) => string;
 
 interface ColorOptions {
+  bgColor?: ColorName;
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
@@ -66,11 +67,15 @@ const color = (message: string, color: ColorName, options?: ColorOptions) => {
   if (options?.underline) {
     message = `${colors.underscore}${message}`;
   }
-  if (options?.inverse) {
-    message = `${colors.reverse}${message}`;
-  }
+
   if (options?.strikethrough) {
     message = `${colors.strikethrough}${message}`;
+  }
+  if (options?.bgColor) {
+    message = `${colors[options.bgColor]}${message}`;
+  }
+  if (options?.inverse) {
+    message = `${colors.reverse}${message}`;
   }
 
   return `${colors[color]}${message}${colors.reset}`;
@@ -89,7 +94,9 @@ type ColorMe = Record<ColorName, ColorFunction>;
  * console.log(message);
  * ```
  */
-export const colorMe: ColorMe = {} as ColorMe;
+const colorMe: ColorMe = {} as ColorMe;
+
+export { colorMe, type ColorName, type ColorOptions };
 
 for (const colorName in colors) {
   colorMe[colorName as ColorName] = (message: string, options?: ColorOptions) =>
