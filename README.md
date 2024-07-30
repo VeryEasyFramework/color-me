@@ -25,7 +25,7 @@ Or with options:
 ```typescript
 import { colorMe } from "@eveffer/color-me";
 
-const message = colorMe("Hello, world!",{
+const message = colorMe.brightBlue("Hello, world!",{
   bgColor: 'bgRed',
   bold:true;
   italic:true;
