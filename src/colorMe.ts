@@ -30,7 +30,7 @@ const color = (message: string, color: ColorName, options?: ColorOptions) => {
  *
  * @example
  * ```ts
- * import { colorMe } from "@eveffer/color-me";
+ * import { colorMe } from "@vef/color-me";
  *
  * const message = colorMe.green("Hello, World!");
  * console.log(message);
