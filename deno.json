@@ -1,6 +1,11 @@
 {
-  "name": "@eveffer/color-me",
+  "name": "@vef/color-me",
   "version": "1.0.2",
   "exports": "./mod.ts",
-  "exclude": [".github"]
+  "publish": {
+    "exclude": [
+      ".github",
+      ".vscode"
+    ]
+  }
 }
